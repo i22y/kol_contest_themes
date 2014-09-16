@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html> <!--<![endif]-->
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=PT+Serif|Raleway' rel='stylesheet' type='text/css'>
+        <!-- FontAwesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Bootstrap Form Validator -->
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/css/bootstrapvalidator.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <link href="https//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+        <style type="text/css">
+          .signup_form .inputs{
+            padding-top: 5px;
+          }
+          .signup_form select{
+            height: 35px;
+          }
+        </style>
+        <![endif]-->
+
+        <style>
+            /* Default Styles
+            ---------------------------------------------------------------------*/
+            body, html {
+                height: 100%;
+                font-size: 62.5%;
+            }
+
+            body {
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+                background-color: #444444;
+                font-size: 18px; font-size: 1.8rem;
+            }
+            
+            h1 {font-size: 38px; font-size: 3.8rem;}
+            h2 {font-size: 32px; font-size: 3.2rem;}
+            h3 {font-size: 26px; font-size: 2.6rem;}
+            h4 {font-size: 20px; font-size: 2.0rem;}
+            h5 {font-size: 16px; font-size: 1.6rem;}
+            h6 {font-size: 14px; font-size: 1.4rem;}
+
+            body, input, textarea, select {
+                {{content.body_font | font_family}}
+            }
+
+            a {
+                color: {{content.link_color}};
+            }
+
+            a:hover {
+                color: {{content.link_color | darker_color}};
+            }
+
+
+            h1, h2, h3, h4, .button {
+                {{content.headline_font | font_family}}
+            }
+
+            h2, h3 {
+                line-height: 1.5em;
+            }
+
+            
+            /* Layout Styles
+            ---------------------------------------------------------------------*/ 
+
+            .bg-image {
+                height:100%;
+                width:100%;
+                background:url('https://d2zc23renulrga.cloudfront.net/assets/26643/po93gtrk51hpm2um10wh/laboratory.jpg') no-repeat center center fixed;
+                background-size: cover;
+                  -webkit-background-size: cover;
+                  -moz-background-size: cover;
+                  -o-background-size: cover;
+                image-rendering: optimizeQuality; /* Gecko */
+                -ms-interpolation-mode: bicubic; /* IE */
+                filter: blur(10px);
+                  -webkit-filter: blur(5px);
+                  -moz-filter: blur(5px);
+                  -o-filter: blur(5px);
+                  -ms-filter: blur(5px);
+                position: absolute;
+                left:0;
+                top: 0;
+            }
+
+            #wrapper {
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                display: block;
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+                
+            .fill { 
+                min-height: 100%;
+                height: 100%;
+            }
+
+            .container-fluid {
+              padding-right: 0px;
+              padding-left: 0px;
+            }
+
+            /* Header & Logo Styles
+            ---------------------------------------------------------------------*/
+
+            #name_or_logo {
+                margin-top: 100px;
+            }
+
+            #form {
+                margin-top: 50px;
+            }
+
+            #description {
+                background-color: rgb(188,241,255);
+                background-color: rgba(188,241,255,0.8);
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                padding: 1.25em;
+                min-height: 100%;
+            }
+
+            #description h1, h2, h3, h4, h5, h6 {
+                color:#fff;
+            }
+
+            .title{
+                color: {{content.title_color}};        
+            }
+
+            /* Signup Process 
+            ---------------------------------------------------------------------*/
+
+            .form-horizontal .has-feedback .form-control-feedback {
+                top: 0;
+                right: 20px;
+            }
+
+            .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+                /*color: #ffffff;*/
+                font-size: 100%
+            }
+
+            .modal-dialog .has-error .help-block, .modal-dialog .has-error .modal-dialog .control-label, .modal-dialog .has-error .radio, .modal-dialog .has-error .checkbox, .modal-dialog .has-error .radio-inline, .modal-dialog .has-error .checkbox-inline {
+                color: #ffffff;
+                font-size: 100%;
+            }
+
+            /* Double Opt-In Modal 
+            -------------------------------------------------------------------*/
+            .modal-dialog {
+                width: 100%;
+                height: auto;
+                padding-top: 20%;
+                margin: 0;
+            }
+
+            .modal-content {
+                height: 100%;
+                border-radius: 0;
+                background-color: #0094bc;
+            }
+
+            .modal-header {
+              border: none;
+            }
+
+             button.close {
+              -webkit-appearance: none;
+              padding: 3px 10px 0px;
+            }  
+
+            /* Button Styles 
+            ------------------------------------------------------------*/
+
+            .btn-lgr {
+                font-size: 22px;
+                line-height: 1;
+                border-radius: 10px;
+                padding: 20px 60px 18px;
+            }
+
+            .btn {
+                transition: all ease-in-out 0.2s;
+                position: relative;
+                outline: medium none;
+                -moz-outline-style: none;
+                top: 0;
+            }
+
+            .btn:focus {
+                outline: medium none;
+                -moz-outline-style: none;
+            }
+            .btn:active {
+                margin-top: 3px;
+                margin-bottom: -3px;
+            }
+
+            .btn-kol-warning { 
+                color: #FFFFFF; 
+                background-color: #FBB829;
+                border-color: #FBB829;
+                /*background-color: {{content.button_color}};
+                border-color: {{content.button_color}};*/                
+            } 
+             
+            .btn-kol-warning:hover, 
+            .btn-kol-warning:focus,
+            .btn-kol-warning:active, 
+            .btn-kol-warning.active, 
+            .open .dropdown-toggle.btn-kol-warning { 
+                color: #FFFFFF; 
+                background-color: #d49104;
+                border-color: #d49104;
+                /*background-color: {{content.button_color | darker_color}};
+                border-color: {{content.button_color | darker_color}};*/
+            }
+
+            .btn-kol-warning.btn-3d { 
+                -webkit-box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                /*-webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);*/
+            } 
+             
+            .btn-kol-warning.btn-3d:hover, 
+            .btn-kol-warning.btn-3d:focus { 
+                -webkit-box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                /*-webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);*/
+            }
+
+            .btn-kol-warning.btn-3d:active, 
+            .btn-kol-warning.btn-3d.active, 
+            .open .dropdown-toggle.btn-kol-warning.btn-3d { 
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Background image -->
+        <div class="bg-image"></div>
+
+        <!-- Start Content -->
+        <div class="container-fluid fill">
+            <div class="row" id="wrapper">
+
+                <!-- START LOGO SIDE -->
+                <!-- USE PULL-RIGHT TO SWITCH LAYOUT -->
+                <section id="name_or_logo" class="col-xs-12 col-sm-7 text-center pull-right">
+                        <img data-mercury="kickimage" data-content-name="logo_image" alt="{{content.title}}" src="https://d2zc23renulrga.cloudfront.net/assets/26643/frfzhdvrlzf1l3zof5lp/kol-w.png" class="img-responsive center-block">
+                </section> <!-- /end col -->
+                <!-- /END LOGO SIDE -->
+
+                <!-- START DESCRIPTION SIDE -->            
+                <section id="description" class=" col-xs-12 col-sm-5">
+                    <div id="form" class="row">
+                        <!-- Headline -->
+                        <div class="col-md-10 col-md-offset-1 text-center">
+                            <h1 class="title">KickoffLabs Viral Contests Theme</h1>
+                            <h2 class="title">KickoffLabs Viral Contests Theme</h2>
+                            <h3 class="title">KickoffLabs Viral Contests Theme</h3>
+                            <h4 class="title">KickoffLabs Viral Contests Theme</h4>
+                            <h5 class="title">KickoffLabs Viral Contests Theme</h5>
+                            <h6 class="title">KickoffLabs Viral Contests Theme</h6>
+                            <br>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+                    
+                    <div class="row text-center">
+                        <!-- Prize description -->
+                        <div class="col-md-6">
+                            <h3 class="text-muted"><i class="icon-trophy"></i> The prize</h3>
+                            <p>An amazing prize awaits you...</p>
+                        </div> <!-- /end col -->
+                        <!-- Entry Description -->
+                        <div class="col-md-6">
+                            <h3 class="text-muted"><i class="icon-star"></i> The winner</h3>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+
+                    <div class="row">
+                        <!-- Countdown Timer -->
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-muted"><i class="fa fa-spin fa-clock-o"></i> Ends in:<br><strong class="countdown outline"></strong></h3>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+
+                    <div class="row">
+                        <!-- Countdown Timer -->
+                        <div class="col-md-12 text-center">
+                            <h2 class="text-muted">We're giving away some amazing prizes. Don't miss out on your chance to win and enter today!</h2>
+                            <br><br>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+
+                    <!-- START OPTIONAL One, Two, OR Three Step Opt-In -->              
+                    <!-- SINGLE Step Opt-In -->
+                    <div id="one_step" class="row">  
+                        <div class="col-sm-10 col-sm-offset-1 text-center">
+                            <form role="form" class="oneStep">
+                                <div class="form-group">
+                                    <!-- <label for="exampleInputEmail1"></label> -->
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-lg fa-envelope"></i></div>
+                                        <input type="text" class="form-control input-lg text-center" name="email" placeholder="Enter your email" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-3d btn-kol-warning btn-lgr btn-block">One Step Opt-In</button>
+                            </form>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+                    
+                    <hr>
+                    
+                    <!-- DOUBLE Step Opt-In -->
+                    <div id="two_step" class="row">
+                        <div class="col-sm-10 col-sm-offset-1 text-center">
+                            <a class="btn btn-3d btn-kol-warning btn-lgr btn-block" data-toggle="modal" data-target="#signupModal">Two Step Opt-In</a>
+                    <!-- START Two Step Opt-In Modal -->
+                        <div class="modal" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">    <i class="fa fa-times-circle-o"></i>
+                                    </button>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="kol-w.png">
+                                        </div>
+                                    </div>
+                                </div> <!-- /end modal header -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        
+                                    <div class="col-md-6 col-md-offset-3 twoStep">
+                                        <form role="form" class="">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                <!-- <label for="exampleInputEmail1"></label> -->
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><i class="fa fa-lg fa-envelope"></i></div>
+                                                    <input type="text" class="form-control input-lg text-center" name="email" placeholder="Enter your email" />
+                                                    </div>
+                                                </div>
+                                            </div><!-- end row -->
+                                            </div>
+                                            <button type="submit" class="btn btn-3d btn-kol-warning btn-lgr btn-block">Two Step Opt-In</button>
+                                        </form>
+                                    </div> <!-- /end col -->
+                                    </div> <!-- /end row -->
+                                </div> <!-- /end modal body -->
+                            </div> <!-- /end modal content -->
+                        </div> <!-- /end modal dialog -->
+                    </div> <!-- /end modal -->
+                </div> <!-- /end col -->
+            </div> <!-- /end row -->
+                 
+                    <hr>
+                  
+                    <!-- TRIPLE Step Opt-In -->
+                    <div id="three_step" class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <!-- Question Form -->
+                            <form class="threeStep form-horizontal text-center">
+                                <!-- Question List -->
+                                <div id="question" class="form-group">
+                                    <h3 class="text-muted">
+                                        <span class="icon-stack">
+                                            <i class="icon-circle icon-stack-base"></i>
+                                            <span class="icon-fixed-width icon-light"><strong>&nbsp;1</strong></span>
+                                        </span>
+                                        Answer to qualify
+                                    </h3>
+                                    <!-- Question Text -->
+                                    <h3 class="text-muted">Do you want to win a prize?</h3>
+                                    <!-- /end Question Text -->
+                                    <div class="col-xs-12 text-center">
+                                        <select name="quiz" class="form-control input-lg">
+                                            <!-- Main Question -->
+                                            <option value="">-- Select your answer </option>
+                                            <!-- Wrong Answer #1 -->
+                                            <option value="1">I dunno, maybe?</option>
+                                            <!-- RIGHT ANSWER -->
+                                            <option value="2">Nah, to lazy to care.</option>
+                                            <!-- Wrong Answer #2 -->
+                                            <option value="3">Heck yeah, I want in!</option>
+                                        </select>
+                                    </div> <!-- /end col -->
+                                </div> <!-- /end Question List -->
+                                <!-- Wrong Response #1 -->
+                                <div id="wrong" class="panel panel-danger" style="display:none;">
+                                  <div class="panel-heading text-center">Give it another try!</div>
+                                </div>
+                                <!-- /end Wrong Response #1 -->
+                                <!-- Wrong Response #2 -->
+                                <div id="wrong2" class="panel panel-danger" style="display:none;">
+                                    <div class="panel-heading text-center">Uh-oh... Really?</div>
+                                </div>
+                                <!-- /end Wrong Response #2 -->   
+                            </form>
+                            <!-- / end Question Form -->
+                            <!-- RIGHT RESPONSE -->
+                            <form role="form" class="emailStep text-center" id="answer" style="display:none;">
+                                <h3 class="text-muted">
+                                    <span class="icon-stack">
+                                        <i class="icon-circle icon-stack-base"></i>
+                                            <span class="icon-fixed-width icon-light"><strong>&nbsp;2</strong></span>
+                                    </span>
+                                    Great!
+                                </h3>
+                                <!-- Answer Response Text -->
+                                <h3 class="text-muted">Now enter your email</h3>
+                                <!-- /end Answer Response Text -->
+                                <div class="form-group">
+                                    <!-- <label class="col-xs-12 text-center"></label> -->
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-lg fa-envelope"></i></div>
+                                        <input type="text" class="form-control input-lg text-center" name="email" placeholder="you@awesome.com" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-3d btn-kol-warning btn-lgr btn-block">Triple opt-in</button>
+                            </form>  
+                                
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+                    <!-- /END OPTIONAL One, Two, OR Three Step Opt-In -->
+                </section> <!-- /end col -->
+        <!-- /END DESCRIPTION SIDE -->            
+          
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+
+        <!-- http://rendro.github.io/countdown/ -->
+        <script src="https://d2zc23renulrga.cloudfront.net/assets/26643/0m9txtd6bdg49uxq93do/jquery.countdown.js"></script>
+        <script type="text/javascript">
+            $('.countdown').countdown({
+                date: "Aug 24, 2015 00:00:00",
+                render: function(data) {
+                    var el = $(this.el);
+                    el.empty()
+                        .append(this.leadingZeros(data.days, 0) + " <span>days</span> ")
+                        .append(this.leadingZeros(data.hours, 2) + "<span>hrs </span>")
+                        .append(this.leadingZeros(data.min, 2) + "<span>mins </span>")
+                        .append(this.leadingZeros(data.sec, 2) + "<span>s</span>");
+                }
+            });
+
+            $('form select[name=quiz]').change(function(e){
+                if ($('form select[name=quiz]').val() == '1'){
+                    $('#wrong').show();
+                    $('#answer').hide();
+                }else if ($('form select[name=quiz]').val() == '2'){
+                    $('#wrong').show();
+                    $('#answer').hide();
+                }else if ($('form select[name=quiz]').val() == '3'){
+                    $('#answer').show();
+                    $('#wrong').hide();
+                    $('#question').hide();
+                }else{
+                    $('#answer').hide();
+                    $('#wrong').hide();
+                }
+            });
+
+        </script>
+
+        <!-- Bootstrap Validator http://bootstrapvalidator.com/ -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.oneStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+
+                $('.twoStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    excluded: [':disabled'],
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                $('.threeStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        quiz: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Is it really that hard?"
+                                },
+                                regexp: {
+                                    regexp: /.*3$/,
+                                    message: ' '
+                                }
+                            } 
+                        }
+                    }
+                });
+
+                $('.emailStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+
+            });
+        </script>
+
+    </body>
+</html>

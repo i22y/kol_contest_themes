@@ -1,0 +1,260 @@
+---
+form:
+- name: Email
+  field_type: email
+  description: Your best email address...
+  required: true
+include_default_options: true
+options:
+  basics:
+    logo_image:
+      hint: An image for your logo that will replace your site title.
+      editor: Image
+    background_image:
+      hint: The background image for your page. Images are scaled to fit. 
+        Ideally use a background image with a size above 1920 x 1280 pixels or above.
+      editor: Image
+      default: //d2zc23renulrga.cloudfront.net/assets/26643/cald9sz54uzc9u6g0mmy/palm_trees.jpg
+    background_blur:
+      hint: Adds a blur effect to your background image.
+      editor: tf
+      default: false
+    page_layout:
+      hint: "The side of the page the form should live. \n"
+      editor: Choice
+      default: Right
+      choices:
+      - Left
+      - Right
+    3D_button:
+      hint: Choose between a flat button or a 3D button.
+      editor: tf
+      default: true
+  show_sections:
+    show_tagline:
+      hint: Display one line description of your business.
+      editor: tf
+      default: false
+    show_video:
+      hint: Place a video on the page. (Use what is within the src "quotes" in your embed code).
+      editor: string
+    show_text_below_form:
+      hint: Add a text area below the form.
+      editor: tf
+      default: false
+    box_color:
+      hint: Toggle form background color
+      editor: Choice
+      default: Transparent
+      choices:
+      - Solid
+      - Transparent
+      - Invisible
+  contest:
+    show_countdown_timer:
+      hint: Show or Hide the contest countdown timer.
+      editor: tf
+      default: true
+    contest_end_date:
+      hint: Format as = Month Day, Year / (August 24, 2015)
+      editor: string
+      default: September 1, 2015
+    success_microcopy:
+      hint: Under form field success text (appears while typing ONLY for required form fields).
+      editor: string
+      default: We're cheering for you...
+    error_microcopy:
+      hint: Under form field error text (appears ONLY for required form fields).
+      editor: string
+      default: Don't you want to enter the contest?
+  fonts:
+    title_brand_font:
+      hint: Customize your title fonts.
+      editor: font
+      default: Montserrat
+    headline_font:
+      hint: Customize your body fonts.
+      editor: font
+      default: Montserrat
+    body_font:
+      hint: Customize your body fonts.
+      editor: font
+      default: Nunito
+    text_align:
+      hint: Text align for text content.
+      editor: Choice
+      default: Center
+      choices:
+      - Center
+      - Left
+      - Right
+  colors:
+    background_color:
+      hint: The body background color (if NO background image is used).
+      editor: color
+      default: '#f7f7f7'
+    signup_form_background_color:
+      hint: The signup form background color.
+      editor: color
+      default: '#62bcd6'
+    modal_form_background_color:
+      hint: The signup modal popup background color.
+      editor: color
+      default: '#62bcd6'
+    title_brand_color:
+      hint: The color of the title font (if NO logo image is used).
+      editor: color
+      default: '#4f4f4f'
+    headline_color:
+      hint: The color of the headline font.
+      editor: color
+      default: '#4f4f4f'
+    contest_label_color:
+      hint: The color of the contest labels.
+      editor: color
+      default: '#f7f7f7'
+    body_text_color:
+      hint: The primary color used for text on the page.
+      editor: color
+      default: '#f7f7f7'
+    form_label_color:
+      hint: The text color used of the form input area.
+      editor: color
+      default: '#ababab'
+    link_color:
+      hint: The color used for links within your landing page.
+      editor: color
+      default: '#f7f7f7'
+    button_color:
+      hint: The color of the button on your landing page.
+      editor: color
+      default: '#ff6600'
+    social_links_color:
+      hint: The background color of social link buttons.
+      editor: color
+      default: '#319cbb'
+  signup:
+    show_labels:
+      hint: Should form fields have labels?
+      editor: tf
+      default: false
+    label_text_alignment:
+      hint: Where to align your form's text.
+      editor: Choice
+      default: Center
+      choices:
+      - Left
+      - Center
+    button_text:
+      hint: Text of the button on the form
+      editor: string
+      default: Enter to Win!
+    popup_title:
+      hint: Title text of the popup signup form.
+      editor: html
+      default: <h3>Enter your email address to enter the contest!</h3>
+    thank_you_message:
+      hint: This is what someone sees after they enter their email. Thank them and
+        encourage them to share.
+      editor: html
+      default: <h1>You've entered the contest!</h1><h3>Increase your odds of winning by sharing your personal link with friends!</h3>
+    facebook_share_button:
+      hint: Show Facebook share after signup?
+      editor: tf
+      default: true
+    twitter_share_button:
+      hint: Show Twitter share after signup?
+      editor: tf
+      default: true
+    google_plus_share_button:
+      hint: Show Google+ share after signup?
+      editor: tf
+      default: true
+    email_share_button:
+      hint: Show email share after signup? You generally want this on!
+      editor: tf
+      default: true
+  footer:
+    facebook_url:
+      hint: The full link to your Facebook page.
+      editor: string
+    twitter_url:
+      hint: The full link to your Twitter page.
+      editor: string
+    google_plus_url:
+      hint: The full link to your Google+ page.
+      editor: string
+    pinterest_url:
+      hint: The full link to your Pinterest page.
+      editor: string
+    instagram_url:
+      hint: The full link to your Instagram page.
+      editor: string
+    linkedin_url:
+      hint: The full link to your LinkedIn page.
+      editor: string
+    youtube_url:
+      hint: The full link to your YouTube channel.
+      editor: string
+    blog_url:
+      hint: The full link to your Blog.
+      editor: string
+    email_address:
+      hint: The Email Address to contact you.
+      editor: string
+    privacy_link_text:
+      hint: The name of the link to your privacy page.
+      editor: string
+      default: Privacy
+  inline:
+    title:
+      hint: The title of your landing page that's shown unless you use a logo image.
+      editor: string
+      default: Your title or brand goes here
+    tagline:
+      hint: A one line description of your contest or business.
+      editor: Html
+      default: <h2>You can't win if you don't enter</h2>
+    title_description:
+      hint: Your contest title should go here.
+      editor: Html
+      default: <h1>We're giving away something amazing</h1>
+    main_description:
+      hint: The bulk of your product description should go here.
+      editor: Html
+      default: <h1><font color="#4f4f4f">Entering is easy, simply click below...</font></h1>
+    prize_label:
+      hint: Enter your prize label here.
+      editor: Html
+      default: <h3><i class="icon-trophy"></i> The prize:</h3>
+    prize_description:
+      hint: Enter your prize description here.
+      editor: Html
+      default: <h3>Check out this awesome prize</h3>
+    timer_label:
+      hint: The contest end.
+      editor: Html
+      default: <h3 class=""><i class="icon-time"></i> Ends in:</h3>
+    after_form:
+      hint: Some text here goes after the form.
+      editor: Html
+      default: <p>We rest our case.</p>
+    copyright:
+      hint: Your copyright.
+      default: '&copy; 2014'
+      editor: string
+    facebook_color:
+      default: '#3b5998'
+      editor: string
+    twitter_color:
+      default: '#00aced'
+      editor: string
+    googleplus_color:
+      default: '#dd4b39'
+      editor: string
+    linkedin_color:
+      default: '#007bb6'
+      editor: string
+    email_color:
+      default: '#f7f7f7'
+      editor: string

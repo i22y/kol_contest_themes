@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html> <!--<![endif]-->
+    
+	<head>
+		{% common_header %}
+		{{ content.title_brand_font | load_font}}
+		{{ content.headline_font | load_font}}
+		{{ content.body_font | load_font}}
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width">
+		<link href="{% asset_path css/reset.css %}" media="screen" rel="stylesheet" type="text/css" />
+		<!-- Bootstrap 3 -->
+		<link href="{% asset_path css/bootstrap/3.2.0/bootstrap.min.css %}" rel="stylesheet">
+		<!-- FontAwesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Form Validator -->
+		<link href="{% asset_path js/jquery-libs/bootstrap_validator/bootstrapvalidator.min.css %}" rel="stylesheet">
+    
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+			<link href="https//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+			<style type="text/css">
+		  		.signup_form .inputs{
+		    		padding-top: 5px;
+		  		}
+		  			.signup_form select{
+		    	height: 35px;
+		  		}
+			</style>
+		<![endif]-->
+		<!--[if lt IE 8]>
+    		<link href="{% asset_path css/bootstrap/3.2.0/bootstrap-ie7.css %}" rel="stylesheet">
+		<![endif]-->
+
+		<!-- CSS STYLES -->
+		<style>
+			/* Default Styles
+			---------------------------------------------------------------------*/
+			body, html {
+	        	height: 100%;
+	        }
+
+	        body {
+	            font-size: 18px;
+	            color: {{content.body_text_color}};
+	            text-rendering: optimizeLegibility;
+	            -webkit-font-smoothing: antialiased;
+	        }
+
+	        body, input, textarea, select {
+	            {{content.body_font | font_family}}
+	        }
+
+			h1 {font-size: 38px;}
+            h2 {font-size: 32px;}
+            h3 {font-size: 26px;}
+            h4 {font-size: 20px;}
+            h5 {font-size: 16px;}
+            h6 {font-size: 14px;}
+
+			h1, h2, h3, h4, h5 {
+				line-height: 1.2em;
+			}
+
+			.descFont {
+				{{content.headline_font | font_family}}
+			}
+
+			button {
+				{{content.headline_font | font_family}}
+				color: {{content.link_color}};
+			}
+
+			a {
+				color: {{content.link_color}};
+			}
+
+			a:hover {
+				color: {{content.link_color | darker_color}};
+			}
+	        
+	        .titleFont {
+				{{content.title_brand_font | font_family}}
+	        	color: {{content.title_brand_color}};
+			}
+
+			.headlineFont {
+				{{content.headline_font | font_family}}
+				color: {{content.headline_color}};
+			}
+
+			.contestLabel {
+				color: {{content.contest_label_color}};
+			}
+
+			.textAlign {
+				{% case content.text_align %}
+					{% when 'Left' %}
+				    	text-align: left;
+				    {% when 'Center' %}
+				    	text-align: center;
+				    {% when 'Right' %}
+				    	text-align: right;
+				{% endcase %}
+			}
+
+			*, *:before, *:after {
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-ms-box-sizing: border-box;
+				-o-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			::selection {
+				background: {{content.button_color}};
+			}
+
+			::-moz-selection {
+				background: {{content.button_color}};
+			}
+
+			/* HOVER */
+			.button, .button:active, .button.active,
+			.button:hover, .row:not(.multiple) #email.hover,
+			#footer .social_links a:hover  {
+				-webkit-transition: all .15s ease;
+				-moz-transition: all .15s ease;
+				-ms-transition: all .15s ease;
+				-o-transition: all .15s ease;
+				transition: all .15s ease;
+			}
+
+			/* Layout Styles
+			---------------------------------------------------------------------*/      			
+			.bg-image {
+	            position: fixed;
+	            top:0;
+    			left:0;
+	            {% if content.background_image != '' %}
+	            	background:url('{{content.background_image}}');
+	            {% else %}
+	            	background-color: {{content.background_color}};
+	            {% endif %}
+	            background-repeat: no-repeat;
+				background-position: center center;
+	            background-attachment: scroll;
+	              -webkit-background-size: cover;
+	              -moz-background-size: cover;
+	              -o-background-size: cover;
+	            background-size: cover;
+	            height:100%;
+	            width:100%;
+	            image-rendering: optimizeQuality; /* Gecko */
+	            -ms-interpolation-mode: bicubic; /* IE */
+	            {% if content.background_blur %}
+		            filter: blur(10px);
+		              -webkit-filter: blur(5px);
+		              -moz-filter: blur(5px);
+		              -o-filter: blur(5px);
+		              -ms-filter: blur(5px);
+		        	clip: rect(5px,295px,295px;5px);
+                {% endif %}
+	        	@media screen and (max-device-width: 1024px) {
+		        	background-attachment: fixed;
+		        }
+	        }
+
+	        #wrapper {
+	            width: 100%;
+	            height: 100%;
+	            min-height: 100%;
+	            display: block;
+	            margin-right: 0px;
+	            margin-left: 0px;
+	        }
+	                
+	        .fill { 
+	            min-height: 100%;
+	            height: 100%;
+	        }
+
+	        .container-fluid {
+	        	padding-right: 0px;
+	        	padding-left: 0px;
+	        }
+
+			/* Sides Styles
+			---------------------------------------------------------------------*/
+
+			#branding {
+	            {% if content.show_video != '' %}
+	            	margin-top: 10%;
+				{% else %}
+					margin-top: 20%;
+				{% endif %}
+	            margin-bottom: 15%;
+				position:relative; 
+				z-index:1000;
+				display:block;
+	            {% if content.page_layout == 'Left' %} 
+				    float: right!important;
+				{% endif %}
+	        }
+
+	        #form_side {
+	            margin-top: 10%;
+	        }
+
+
+	        #description {
+	        	{% case content.box_color %}
+				{% when 'Solid' %}
+            		background-color: {{content.signup_form_background_color}};
+					box-shadow: 0 0 10px rgba(0,0,0,0.5);
+				{% when 'Transparent' %}
+					background-color: {{content.signup_form_background_color | as_transparent_background}};
+					box-shadow: 0 0 10px rgba(0,0,0,0.5);
+				{% when 'Invisible' %}
+					background-color: transparent;
+				{% endcase %}
+	            padding: 1.25em;
+	            min-height: 100%;
+	        }
+
+			/* Form Styles
+			---------------------------------------------------------------------*/
+			.form-control-feedback {
+			    top: 28px;
+			    right: 20px;
+			}
+			.selectContainer .form-control-feedback {
+			    right: 35px;
+			}
+
+			.checkContainer .form-control-feedback {
+			    top: -10px;
+			    right: 0px;
+			}
+
+			.has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {
+				color: {{content.body_text_color}};
+			}
+
+	        .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+	            color: {{content.body_text_color}};
+	        }
+
+			.form-control {
+				color: {{content.form_label_color}};
+			}
+
+			.form-control input, textarea{
+			    color: {{content.form_label_color}};
+			}
+			.form-control::-webkit-input-placeholder { /* WebKit browsers */
+			    color:    {{content.form_label_color}};
+			}
+			.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			    color:    {{content.form_label_color}};
+			}
+			.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
+			    color:    {{content.form_label_color}};
+			}
+			.form-control:-ms-input-placeholder { /* Internet Explorer 10+ */
+			    color:    {{content.form_label_color}};
+			}
+
+			.formAlign {
+				{% if content.label_text_alignment == 'Left' %} 
+				    text-align: left;
+		    	{% else if %}
+			      text-align: center;
+				{% endif %}
+			}
+
+
+			/* Button Styles 
+	            ------------------------------------------------------------*/
+	        .btn-lgr {
+	            font-size: 25px;
+	            line-height: 1;
+	            border-radius: 10px;
+	            padding: 20px 45px 18px;
+	        }
+
+	        .btn {
+	            transition: all ease-in-out 0.2s;
+	            position: relative;
+	            outline: medium none;
+	            -moz-outline-style: none;
+	            top: 0;
+	        }
+
+	        .btn:focus {
+	            outline: medium none;
+	            -moz-outline-style: none;
+	        }
+	        
+	        .btn:active {
+	            margin-top: 3px;
+	            margin-bottom: -3px;
+	        }
+
+	        .btn-kol { 
+	            color: {{content.button_color | font_color_from_background : '#FEFEFE', '#444444'}}; 
+	            background-color: {{content.button_color}};
+	            border-color: {{content.button_color}};                
+	        }
+	             
+	        .btn-kol:hover, 
+	        .btn-kol:focus,
+	        .btn-kol:active, 
+	        .btn-kol.active, 
+	        .open .dropdown-toggle.btn-kol { 
+	            color: {{content.button_color | font_color_from_background : '#FEFEFE', '#444444'}};
+	            background-color: {{content.button_color | darker_color}};
+	            border-color: {{content.button_color | darker_color}};
+	        }
+
+	        .btn-kol.btn-3d { 
+	            -webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	            -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	            box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	        } 
+	             
+	        .btn-kol.btn-3d:hover, 
+	        .btn-kol.btn-3d:focus { 
+	            -webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	            -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	            box-shadow: 0 6px 0 {{content.button_color | darker_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+	        }
+
+	        .btn-kol.btn-3d:active, 
+	        .btn-kol.btn-3d.active, 
+	        .open .dropdown-toggle.btn-kol.btn-3d { 
+	            -webkit-box-shadow: none;
+	            -moz-box-shadow: none;
+	            box-shadow: none;
+	        }
+
+	        .btn-facebook {
+	        	background-color: {{content.facebook_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-facebook:hover,
+	        .btn-facebook:focus {
+	        	background-color: {{content.facebook_color | lighter_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-twitter {
+	        	background-color: {{content.twitter_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-twitter:hover,
+	        .btn-twitter:focus {
+	        	background-color: {{content.twitter_color | lighter_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-googleplus {
+	        	background-color: {{content.googleplus_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-googleplus:hover,
+	        .btn-googleplus:focus {
+	        	background-color: {{content.googleplus_color | lighter_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-linkedin {
+	        	background-color: {{content.linkedin_color}};
+	        	color: #fff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-linkedin:hover,
+	        .btn-linkedin:focus {
+	        	background-color: {{content.linkedin_color | lighter_color}};
+	        	color: #ffffff;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-email {
+	        	background-color: {{content.email_color}};
+	        	color: #444444;
+	        	margin: 15px 0px;
+	        }
+
+	        .btn-email:hover,
+	        .btn-email:focus {
+	        	color: #444444;
+	        	background-color: {{content.email_color | lighter_color}};
+	        }
+
+			/* Thank You Response Styles
+			---------------------------------------------------------------------*/
+			#kol_thank_you {
+				display:none;
+				{% case content.text_align %}
+					{% when 'Left' %}
+				    	text-align: left;
+				    {% when 'Center' %}
+				    	text-align: center;
+				    {% when 'Right' %}
+				    	text-align: right;
+				{% endcase %}
+				margin:auto;
+				padding: 25px;
+				position:relative;
+				z-index: 99998;
+				border-radius: 3px;
+				-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+				-moz-box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+				-ms-box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+				-o-box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+				box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+			}
+
+			.common_thank_you_message div {
+				font-size: 24px;
+			}
+
+			.share_links {
+				height: 35px;
+				margin-top: 15px;
+			}
+
+			.share_links a {
+				margin: 0 2px;
+			}
+
+			.click_to_copy, .share_links {
+				text-align: center;
+			}
+
+			#subscribe strong, #subscribe h1, #subscribe h2, #subscribe h3 {
+				display: block;
+				margin-bottom: 15px;
+				line-height: 130%;
+				color: {{content.headline_color}};
+			}
+
+			#subscribe strong {
+				font-size: 24px;
+			}
+
+			.kol_social_url a{
+				color: {{content.title_brand_color | lighter_color}};
+			}
+
+			.click_to_copy a:hover {
+				color: {{content.title_brand_color}};
+			}
+
+			.share_button img {
+				opacity: .75;
+			}
+
+			.share_button img:hover {
+				opacity: 1;
+			}
+
+			/* COPY */
+			.kol_social_url {
+				position:relative;
+				cursor: pointer;
+				margin-bottom: 0;
+				margin: 0 auto;
+				margin-top: 11px;
+				word-wrap: break-word;
+				padding: 5px; cursor: pointer;
+				background: #eee; opacity: 0.9;
+				border-radius: 3px 3px 0px 0px;
+				border: 1px dotted {{content.title_brand_color | lighter_color}};
+				font-size: 20px;
+			}
+
+			.kol_social_url:hover{
+				background: #e1e1e1;
+			}
+
+			#copy{
+				height: 100%;
+				width: 100%;
+				padding:3px;
+				color: #777;
+			}
+
+			#copy:hover{
+				color: #555;
+			}
+
+			#copy.disabled{
+				border-color:transparent;
+				cursor:text;
+			}
+			.click_to_copy {
+				bottom: 0;
+				margin-bottom: 15px;
+				position: relative;
+				padding:4px 0 3px;
+				border-radius: 0px 0px 3px 3px;
+				background: #c4c4c4;
+				color: #888;
+				letter-spacing:1px;
+			}
+
+			.kol_copy:hover .click_to_copy, .disabled .click_to_copy{
+				opacity:1;
+			}
+
+			.no-copy.kol_social_url{cursor: text;}
+			.no-copy.kol_social_url:hover{background: #eee;}
+			.no-copy + .click_to_copy{display: none;}
+
+
+			/* Social Styles
+			---------------------------------------------------------------------*/
+			.social_links {
+				-webkit-transition: all 0.15s ease-in-out;
+				-moz-transition: all 0.15s ease-in-out;
+				-ms-transition: all 0.15s ease-in-out;
+				-o-transition: all 0.15s ease-in-out;
+				transition: all 0.15s ease-in-out;
+			}
+
+			.social_links a {
+				color: {{content.social_links_color | font_color_from_background}};
+				-webkit-transition: all 0.15s ease-in-out;
+				-moz-transition: all 0.15s ease-in-out;
+				-ms-transition: all 0.15s ease-in-out;
+				-o-transition: all 0.15s ease-in-out;
+				transition: all 0.15s ease-in-out;
+			}
+
+			.social_links a:hover, .social_links a:focus {
+				color: {{content.social_links_color | font_color_from_background}};
+			}
+
+			.icon-circle {
+				color: {{content.social_links_color}};
+			}
+
+			.icon-dark {
+				color: {{content.social_links_color | font_color_from_background}};
+			}
+    
+		</style>
+
+		{% integrations header %}
+	
+	</head>
+
+	<body>
+		<!-- START BG IMAGE -->
+        <div class="bg-image"></div>
+        <!-- /END BG IMAGE -->
+
+        <!-- START CONTENT -->
+        <div class="container-fluid fill">
+        	
+        	<div class="row" id="wrapper">
+
+            	<!-- START BRANDING SIDE -->
+                <section id="branding" class="col-xs-12 col-sm-5 col-md-7 textAlign {{content.page_layout}}">
+                    <!-- START BRAND -->
+                    {% if content.logo_image != '' %}
+                        <img data-mercury="kickimage" data-content-name="logo_image" src="{{content.logo_image}}" alt="{{content.title}}" class="img-responsive center-block">
+                    {% else %}
+                        <h1 class="titleFont" data-mercury="text" data-content-name="title">{{content.title}}</h1>
+                    {% endif %}
+                    <!-- /END BRAND -->
+                    <!-- START OPTIONAL VIDEO -->
+                    {% if content.show_video != '' %}
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" src="{{content.show_video}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						</div>
+                    {% endif %}
+                    <!-- /END OPTIONAL VIDEO -->
+                    <!-- START TAGLINE -->
+                    {% if content.show_tagline %}
+                        <div class="headlineFont" data-mercury="wysihat" data-content-name="tagline">{{content.tagline}}</div>
+                    {% endif %}
+                    <!-- /END TAGLINE -->
+                </section>
+                <!-- /END BRANDING SIDE -->
+
+                <!-- START DESCRIPTION SIDE -->            
+                <section id="description" class="col-xs-12 col-sm-7 col-md-5 textAlign">
+                    
+                    <div class="signupHide">
+	                    <!-- START HEADLINE -->
+	                	<div id="form_side" class="row">
+	                        <div class="col-sm-10 col-sm-offset-1">
+	                        	<div class="headlineFont" data-mercury="wysihat" data-content-name="title_description">
+									{{content.title_description}}
+								</div>
+	                            <br>
+	                        </div> <!-- /end col -->
+	                    </div> <!-- /end row -->
+	                    <!-- /END HEADLINE -->
+	                    
+	                    <!-- START PRIZE SECTION -->
+	                    <div class="row">
+	                    	<!-- START PRIZE DESCRIPTION -->
+	                        <div class="col-sm-10 col-sm-offset-1">
+	                            <div class="prize_label contestLabel" data-mercury="wysihat" data-content-name="prize_label">{{content.prize_label}}</div>
+	                            <div class="prize_description" data-mercury="wysihat" data-content-name="prize_description">
+									{{content.prize_description}}
+								</div>
+	                        </div>
+	                        <!-- /END PRIZE DESCRIPTION -->
+	                    </div> <!-- /end row -->
+	                    <!-- /END PRIZE SECTION -->
+
+	                    <!-- START COUNTDOWN TIMER SECTION -->
+	                    {% if content.show_countdown_timer %}
+		                    <div class="row">
+		                        <div class="col-sm-10 col-sm-offset-1">
+		                            <div class="timer_label contestLabel" data-mercury="wysihat" data-content-name="timer_label">{{content.timer_label}}</div>
+		                            <h3 class="countdown outline"></h3>
+		                        </div> <!-- /end col -->
+		                    </div> <!-- /end row -->
+	                    {% endif %}
+	                    <!-- /END COUNTDOWN TIMER SECTION -->
+
+	                    <!-- START MAIN DESCRIPTION -->
+	                    <div class="row">
+	                        <!-- Main Description -->
+	                        <div class="col-sm-10 col-sm-offset-1 textAlign">
+	                            <div class="main_description" data-mercury="wysihat" data-content-name="main_description">
+									{{content.main_description}}
+								</div>
+	                        </div> <!-- /end col -->
+	                    </div> <!-- /end row -->
+	                    <!-- /END MAIN DESCRIPTION -->
+	                </div> <!-- /END Description Content -->
+					<br>
+                    <!-- START SINGLE OPT-IN FORM -->
+                    <div id="oneStep" class="row">  
+                       	<div class="col-sm-10 col-sm-offset-1 oneStep formAlign">
+							{% form %}
+								{% for element in form_elements %}
+									{% case element.field_type %}                            
+					        		{% when 'email' %}
+										<div class="form-group">
+											<div class="row">
+            									<div class="col-sm-12">
+													{% if content.show_labels == true %}
+		                   								<label for="{{element.name}}">{{element.display_text}} {% if {{element.required_class}}%}*{% endif%}</label>
+		                   							{% endif %}
+					               					<input class="{{element.required_class}} form-control input-lg formAlign" id="{{element.name}}" name="email" placeholder="{{element.placeholder}}" type="email" data-label-text="{{element.label}}" />
+					               				</div>
+					               			</div>
+					            		</div>
+					        		{% when 'text' %}
+						           		<div class="form-group">
+						           			<div class="row">
+            									<div class="col-sm-12">
+						           					{% if content.show_labels == true %}
+		                   								<label for="{{element.name}}">{{element.display_text}} {% if {{element.required_class}}%}*{% endif%}</label>
+		                   							{% endif %}
+						               				<input class="{{element.required_class}} form-control input-lg formAlign" id="{{element.name}}" name="text" placeholder="{{element.placeholder}}" type="text" data-label-text="{{element.label}}" />
+						               			</div>
+					               			</div>
+						           		</div>
+						        	{% when 'textarea' %}
+						        		<div class="form-group">
+						        			<div class="row">
+            									<div class="col-sm-12">
+						        					{% if content.show_labels == true %}
+		                   								<label for="{{element.name}}">{{element.display_text}} {% if {{element.required_class}}%}*{% endif%}</label>
+		                   							{% endif %}
+						            				<textarea id="{{element.name}}" class="{{element.required_class}} form-control input-lg formAlign" name="textarea" rows="3" placeholder="{{element.placeholder}}" data-label-text="{{element.label}}"></textarea>
+						            			</div>
+					               			</div>
+						            	</div>
+						        	{% when 'choice' %}
+						        		<div class="form-group">
+						        			<div class="row">
+            									<div class="col-sm-12 selectContainer">
+						        					{% if content.show_labels == true %}
+		                   								<label for="{{element.name}}">{{element.display_text}} {% if {{element.required_class}}%}*{% endif%}</label>
+		                   							{% endif %}
+						            				<select id="{{element.name}}" name="choice" class="{{element.required_class}} form-control input-lg formAlign" placeholder="{{element.placeholder}}" data-label-text="{{element.label}}">
+						            					<option>{{element.placeholder}}</option>
+						           						{% for choice in element.choices %}
+						                					<option>{{choice}}</option>
+						           						{% endfor %}
+						            				</select>
+						            			</div>
+					               			</div>
+						            	</div>
+						        	{% when 'checkbox' %}
+						        		<div class="form-group">
+						        			<div class="row">
+            									<div class="col-sm-12 checkContainer">
+							          				<div class="checkbox">
+							            				<label>
+							            					<input class="{{element.required_class}}" type="checkbox" id="{{element.name}}" name="checkbox" data-label-text = "{{element.label}}" value="" />{% if content.show_labels == true %}
+							            						{{element.display_text}} {% if {{element.required_class}}%}*{% endif%}
+							            					{% else %}
+							            						{{element.placeholder}}
+							            					{% endif %}
+							            				</label>
+							            			</div>
+							            		</div>
+					               			</div>
+							            </div>
+						        	{% endcase %}
+								{%endfor %}
+								<button class="submit btn {% if content.3D_button == true %}btn-3d{% endif %} btn-kol btn-lgr btn-block" id="submit_button" name="submit" type="submit">{{content.button_text}}</button>
+							{% endform %}
+						</div> <!-- /end col -->
+					</div> <!-- /end row -->
+					<!-- /END SINGLE OPT-IN FORM -->
+
+					<!-- START FORM RESPONSE -->
+					{% response %}
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="subscribe">
+									<div class="common_thank_you_message">
+										{{content.thank_you_message}}
+									</div>
+									<div class="row">
+										<!-- START SHARE LINK -->
+										<div class="col-sm-12">
+											<div class="kol_social_url">
+												<div id="copy">{{social_url}}</div>
+											</div>
+											<div class="click_to_copy">Click to copy to clipboard</div>
+										</div> <!-- /END SHARE LINK -->
+										{% if content.facebook_share_button == true %}
+											<div class="col-sm-6">
+												<a href="#" class='btn btn-facebook btn-lg btn-block share_button' onclick="window.open('https://www.facebook.com/sharer.php?u={{social_url | escape}}&t=Caring%20is%20sharing', '_blank', 'width=800,height=400')">
+													<i class="icon-facebook icon-2x"></i>
+												</a>
+											</div>
+										{% endif %}
+										{% if content.twitter_share_button == true %}
+											<div class="col-sm-6">
+												<a href="#" class='btn btn-twitter btn-lg btn-block share_button' onclick="window.open('https://twitter.com/share?url={{social_url | escape}}&text={{content.twitter_share_text | cgi_escape }}', '_blank', 'width=800,height=300')">
+													<i class="icon-twitter icon-2x"></i>
+											    </a>
+											</div>
+										{% endif %}
+										{% if content.google_plus_share_button == true %}
+											<div class="col-sm-6">
+												<a href="#" class='btn btn-googleplus btn-lg btn-block share_button' onclick="window.open('https://plusone.google.com/_/+1/confirm?hl=en&url={{social_url | escape}}&title={{content.title | escape}}', '_blank', 'width=800,height=400')">
+													<i class="icon-google-plus icon-2x"></i>
+											    </a>
+											</div>
+										{% endif %}
+										{% if content.email_share_button == true %}
+											<div class="col-sm-6">
+											    <a class='btn btn-email btn-lg btn-block share_button' href="mailto:?subject={{content.title | escape}}&body={{social_url | escape}}">
+											    	<i class="icon-envelope icon-2x"></i>
+											    </a>
+											</div>
+										{% endif %}
+									</div><!-- /end row -->
+								</div>
+							</div> <!-- /end col -->
+						</div> <!-- /end row -->
+					{% endresponse %}
+					<!-- /END Form Response -->
+					
+					<br>
+					
+					<!-- START CONTENT BELOW FORM -->
+					<div class="signupHide">
+						{% if content.show_text_below_form == true %}
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<div id="post-form-content" class="description {% if form_elements.size > 1 %}multiple{% endif %}" data-mercury="wysihat" data-content-name="after_form">
+										{{ content.after_form }}
+									</div>
+								</div> <!-- /end col -->
+							</div> <!-- /end row -->
+						{% endif %}
+						<!-- /END CONTENT BELOW FORM -->
+						<br>
+						<!-- START SOCIAL LINKS -->
+						<div class="row">
+							<div class="col-sm-12 social_links">
+								<ul class="list-inline">
+									{% if content.facebook_url != '' %}
+										<li>
+											<a class="facebook" target="_blank" href="{{content.facebook_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-facebook icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.twitter_url != '' %}
+										<li>
+											<a class="twitter" target="_blank" href="{{content.twitter_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-twitter icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.google_plus_url != '' %}
+										<li>
+											<a class="googleplus" target="_blank" href="{{content.google_plus_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-google-plus icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.pinterest_url != '' %}
+										<li>
+											<a class="pinterest" target="_blank" href="{{content.pinterest_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-pinterest icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.instagram_url != '' %}
+										<li>
+											<a class="instagram" target="_blank" href="{{content.instagram_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-instagram icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.linkedin_url != '' %}
+										<li>
+											<a class="linkedin" target="_blank" href="{{content.linkedin_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-linkedin icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+					            	{% if content.youtube_url != '' %}
+						             	<li>
+						             		<a class="youtube" target="_blank" href="{{content.youtube_url}}" target="_blank">
+						                		<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-youtube icon-dark"></i>
+												</span>
+									        </a>
+									    </li>
+							    	{% endif %}
+									{% if content.blog_url != '' %}
+										<li>
+											<a class="rss" target="_blank" href="{{content.blog_url}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-rss icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+									{% if content.email_address != '' %}
+										<li>
+											<a class="email" target="_blank" href="mailto:{{content.email_address}}">
+												<span class="icon-stack">
+													<i class="icon-circle icon-stack-base icon-2x"></i>
+													<i class="icon-envelope icon-dark"></i>
+												</span>
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div> <!-- /end col -->
+						</div> <!-- /end row -->
+						<!-- /END SOCIAL LINKS -->
+						<br>
+                    	<!-- START PRIVACY -->
+                    	<div class="row">
+                      		<div class="col-sm-10 col-sm-offset-1">
+                       			<div class="footer_content">
+									<span id="copyright" data-mercury="wysihat" data-content-name="copyright">{{content.copyright}}</span>
+									<a id="privacy_link" target="_blank" href="{{page_url}}/privacy">{{content.privacy_link_text}}</a>
+								</div>
+            	           	</div> <!-- /end col -->
+                	    </div> <!-- /end row -->
+                    	<!-- /END PRIVACY -->
+					</div> <!-- /END HIDE AFTER SHARE -->
+                </section> <!-- /end col -->
+        		<!-- /END DESCRIPTION SIDE -->            
+            
+            </div> <!-- end row / wrapper-->
+        </div> <!-- end container -->								
+							
+		<!-- SCRIPT -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="{% asset_path css/bootstrap/3.2.0/bootstrap.min.js %}"></script>
+        <script src="{% asset_path js/jquery-libs/bootstrap_validator/bootstrapvalidator.min.js %}"></script>
+		<script src="{% asset_path js/jquery-libs/zclip/jquery.zclip.min.js %}"></script>
+		<script src="{% kol_submit_response %}"></script>
+		<script src="{% kol_external 2 %}"></script>
+		<script> 
+			jQuery(document).ready(function(){ 
+				new KOLResponse();
+				new KOLValidation();
+			});
+		</script>
+
+		<script>
+			$('#oneStep').bind ('kol:success', function (event, data){
+		    	$('.signupHide').hide();
+		   	});
+		</script>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+		<script type="text/javascript">
+		$(document).ajaxComplete(function(event, xhr, settings){
+			if(swfobject.hasFlashPlayerVersion("1")){
+			// Initialize copy clip
+			$copy = $('#copy');
+			$copy.zclip({
+				path:'{% asset_path js/jquery-libs/zclip/ZeroClipboard.swf %}',
+				copy:$copy.text(),
+				afterCopy:function(){
+					$copy.closest(".kol_social_url").addClass('disabled');
+					$(".zclip").hide();
+					$(".click_to_copy").html("Copied!")
+					}
+				});
+			} else {
+				$(".kol_social_url").addClass("no-copy");
+			}
+		});
+		</script>
+
+		<!-- START COUNTDOWN TIMER http://rendro.github.io/countdown/ -->
+        <script src="{% asset_path js/jquery-libs/countdown/jquery.countdown_1_0_1.js %}"></script>
+        <script type="text/javascript">
+            $('.countdown').countdown({
+                date: "{{ content.contest_end_date }} 00:00:00",
+                render: function(data) {
+                    var el = $(this.el);
+                    el.empty()
+                        .append(this.leadingZeros(data.days, 0) + "<span>d</span> ")
+                        .append(this.leadingZeros(data.hours, 2) + "<span>hrs </span>")
+                        .append(this.leadingZeros(data.min, 2) + "<span>mins </span>")
+                        .append(this.leadingZeros(data.sec, 2) + "<span>s</span>");
+                }
+            });
+        </script>
+        <!-- /END COUNTDOWN TIMER http://rendro.github.io/countdown/ -->
+
+        <!-- START FORM VALIDATOR http://bootstrapvalidator.com/ -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.oneStep').bootstrapValidator({
+                    message: "{{content.error_microcopy}}",
+                    feedbackIcons: {
+                        valid: 'icon-ok icon-2x',
+                        invalid: 'icon-remove icon-2x',
+                        validating: 'icon-refresh icon-2x'
+                    },
+                    fields: {
+                        email: {
+                        	group: '.col-sm-12',
+                            validators: {
+                                notEmpty: {
+                                    message: "{{content.error_microcopy}}"
+                                },
+                                emailAddress: {
+                                    message: "{{content.success_microcopy}}"
+                                }
+                            }
+                        }{% for element in form_elements %}
+									{% case element.field_type %}{% when 'text' %}{% if {{element.required_class}}%},
+                        text: {
+                        	group: '.col-sm-12',
+		                    validators: {
+		                        notEmpty: {
+		                            message: "{{content.error_microcopy}}"
+		                        },
+		                        stringLength: {
+		                            min: 2,
+		                            message: "{{content.success_microcopy}}"
+		                        }
+		                    }
+		                }{% endif%}{% when 'textarea' %}{% if {{element.required_class}}%},
+		                textarea: {
+                        	group: '.col-sm-12',
+		                    validators: {
+		                        notEmpty: {
+		                            message: "{{content.error_microcopy}}"
+		                        },
+		                        stringLength: {
+		                            min: 2,
+		                            message: "{{content.success_microcopy}}"
+		                        }
+		                    }
+		                }{% endif%}{% when 'choice' %},
+		                choice: {
+                        	group: '.col-sm-12',
+		                    validators: {
+		                    	choice: {
+			                        min: 1,
+			                        message: "{{content.error_microcopy}}"
+			                    }
+		                    }
+		                }{% when 'checkbox' %}{% if {{element.required_class}}%},
+		                checkbox: {
+                        	group: '.col-sm-12',
+		                    validators: {
+		                    	choice: {
+			                        min: 1,
+			                        message: "{{content.error_microcopy}}"
+			                    }
+		                    }
+		                }{% endif%}{% endcase %}{%endfor %}
+                    }
+                });
+            });
+        </script>
+        <!-- /END FORM VALIDATOR http://bootstrapvalidator.com/ -->
+
+	 	{% integrations footer %}
+
+	</body>
+
+</html>

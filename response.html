@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html> <!--<![endif]-->
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=PT+Serif|Raleway' rel='stylesheet' type='text/css'>
+        <!-- FontAwesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Bootstrap Form Validator -->
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/css/bootstrapvalidator.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <link href="https//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+        <style type="text/css">
+          .signup_form .inputs{
+            padding-top: 5px;
+          }
+          .signup_form select{
+            height: 35px;
+          }
+        </style>
+        <![endif]-->
+
+        <style>
+            /* Default Styles
+            ---------------------------------------------------------------------*/
+            body, html {
+                height: 100%;
+                font-size: 62.5%;
+            }
+
+            body {
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+                background-color: #444444;
+                font-size: 18px; font-size: 1.8rem;
+            }
+            
+            h1 {font-size: 38px; font-size: 3.8rem;}
+            h2 {font-size: 32px; font-size: 3.2rem;}
+            h3 {font-size: 26px; font-size: 2.6rem;}
+            h4 {font-size: 20px; font-size: 2.0rem;}
+            h5 {font-size: 16px; font-size: 1.6rem;}
+            h6 {font-size: 14px; font-size: 1.4rem;}
+
+            body, input, textarea, select {
+                {{content.body_font | font_family}}
+            }
+
+            a {
+                color: {{content.link_color}};
+            }
+
+            a:hover {
+                color: {{content.link_color | darker_color}};
+            }
+
+
+            h1, h2, h3, h4, .button {
+                {{content.headline_font | font_family}}
+            }
+
+            h2, h3 {
+                line-height: 1.5em;
+            }
+
+            
+            /* Layout Styles
+            ---------------------------------------------------------------------*/ 
+
+            .bg-image {
+                height:100%;
+                width:100%;
+                background:url('https://d2zc23renulrga.cloudfront.net/assets/26643/po93gtrk51hpm2um10wh/laboratory.jpg') no-repeat center center fixed;
+                background-size: cover;
+                  -webkit-background-size: cover;
+                  -moz-background-size: cover;
+                  -o-background-size: cover;
+                image-rendering: optimizeQuality; /* Gecko */
+                -ms-interpolation-mode: bicubic; /* IE */
+                filter: blur(10px);
+                  -webkit-filter: blur(5px);
+                  -moz-filter: blur(5px);
+                  -o-filter: blur(5px);
+                  -ms-filter: blur(5px);
+                position: absolute;
+                left:0;
+                top: 0;
+            }
+
+            #wrapper {
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                display: block;
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+                
+            .fill { 
+                min-height: 100%;
+                height: 100%;
+            }
+
+            .container-fluid {
+              padding-right: 0px;
+              padding-left: 0px;
+            }
+
+            .top5 { margin-top:5px; }
+            .top7 { margin-top:7px; }
+            .top10 { margin-top:10px; }
+            .top15 { margin-top:15px; }
+            .top17 { margin-top:17px; }
+            .top30 { margin-top:30px; }
+
+            /* Header & Logo Styles
+            ---------------------------------------------------------------------*/
+
+            #name_or_logo {
+                margin-top: 100px;
+            }
+
+            #form {
+                margin-top: 50px;
+            }
+
+            #description {
+                background-color: rgb(188,241,255);
+                background-color: rgba(188,241,255,0.8);
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                padding: 1.25em;
+                min-height: 100%;
+            }
+
+            #description h1, h2, h3, h4, h5, h6 {
+                color:#fff;
+            }
+
+            .title{
+                color: {{content.title_color}};        
+            }
+
+            /* Signup Process 
+            ---------------------------------------------------------------------*/
+
+            .form-horizontal .has-feedback .form-control-feedback {
+                top: 0;
+                right: 20px;
+            }
+
+            .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+                /*color: #ffffff;*/
+                font-size: 100%
+            }
+
+            .modal-dialog .has-error .help-block, .modal-dialog .has-error .modal-dialog .control-label, .modal-dialog .has-error .radio, .modal-dialog .has-error .checkbox, .modal-dialog .has-error .radio-inline, .modal-dialog .has-error .checkbox-inline {
+                color: #ffffff;
+                font-size: 100%;
+            }
+
+            /* Double Opt-In Modal 
+            -------------------------------------------------------------------*/
+            .modal-dialog {
+                width: 100%;
+                height: auto;
+                padding-top: 20%;
+                margin: 0;
+            }
+
+            .modal-content {
+                height: 100%;
+                border-radius: 0;
+                background-color: #0094bc;
+            }
+
+            .modal-header {
+              border: none;
+            }
+
+             button.close {
+              -webkit-appearance: none;
+              padding: 3px 10px 0px;
+            }  
+
+            /* Button Styles 
+            ------------------------------------------------------------*/
+
+            .btn-lgr {
+                font-size: 22px;
+                line-height: 1;
+                border-radius: 10px;
+                padding: 20px 60px 18px;
+            }
+
+            .btn {
+                transition: all ease-in-out 0.2s;
+                position: relative;
+                outline: medium none;
+                -moz-outline-style: none;
+                top: 0;
+            }
+
+            .btn:focus {
+                outline: medium none;
+                -moz-outline-style: none;
+            }
+            .btn:active {
+                margin-top: 3px;
+                margin-bottom: -3px;
+            }
+
+            .btn-kol-warning { 
+                color: #FFFFFF; 
+                background-color: #FBB829;
+                border-color: #FBB829;
+                /*background-color: {{content.button_color}};
+                border-color: {{content.button_color}};*/                
+            } 
+             
+            .btn-kol-warning:hover, 
+            .btn-kol-warning:focus,
+            .btn-kol-warning:active, 
+            .btn-kol-warning.active, 
+            .open .dropdown-toggle.btn-kol-warning { 
+                color: #FFFFFF; 
+                background-color: #d49104;
+                border-color: #d49104;
+                /*background-color: {{content.button_color | darker_color}};
+                border-color: {{content.button_color | darker_color}};*/
+            }
+
+            .btn-kol-warning.btn-3d { 
+                -webkit-box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 #d49104, 0 6px 3px rgba(0, 0, 0, 0.4);
+                /*-webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);*/
+            } 
+             
+            .btn-kol-warning.btn-3d:hover, 
+            .btn-kol-warning.btn-3d:focus { 
+                -webkit-box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 #bb8004, 0 6px 3px rgba(0, 0, 0, 0.4);
+                /*-webkit-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 6px 0 {{content.button_color | darker_color}}, 0 6px 3px rgba(0, 0, 0, 0.4);*/
+            }
+
+            .btn-kol-warning.btn-3d:active, 
+            .btn-kol-warning.btn-3d.active, 
+            .open .dropdown-toggle.btn-kol-warning.btn-3d { 
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+
+
+            #subscribe ul {
+                padding: 15px;
+            }
+
+            #subscribe span {
+                font-size: 21px;
+            }
+
+            /* COPY */
+            .kol_social_url {
+                cursor: pointer;
+                word-wrap: break-word;
+                padding: 7px 40px; 
+                cursor: pointer;
+                background: #eee; opacity: 0.9;
+                border-radius: 3px 3px 0px 0px;
+                border: 1px dotted {{content.title_brand_color | lighter_color}};
+                font-size: 20px;
+                margin-top: 0px !important;
+            }
+
+            .kol_social_url:hover{
+                background: #e1e1e1;
+            }
+
+            #copy{
+                color: #999;
+            }
+
+            #copy:hover{
+                color: #444;
+            }
+
+            #copy.disabled{
+                border-color:transparent;
+                cursor:text;
+            }
+            .click_to_copy {
+                bottom: 0;
+                padding: 11px 0px;
+                border-radius: 0px 0px 3px 3px;
+                background: #c4c4c4;
+                color: #888;
+                letter-spacing: 1px;
+                margin-top: -13px !important;
+                font-size: 14px;
+            }
+
+            .kol_copy:hover .click_to_copy, .disabled .click_to_copy{
+                opacity:1;
+            }
+
+            .no-copy.kol_social_url{cursor: text;}
+            .no-copy.kol_social_url:hover{background: #eee;}
+            .no-copy + .click_to_copy{display: none;}
+
+        </style>
+    </head>
+
+    <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1540896262795689&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+        <!-- Background image -->
+        <div class="bg-image"></div>
+
+        <!-- Start Content -->
+        <div class="container-fluid fill">
+            <div class="row" id="wrapper">
+
+                <!-- START LOGO SIDE -->
+                <!-- USE PULL-RIGHT TO SWITCH LAYOUT -->
+                <section id="name_or_logo" class="col-xs-12 col-sm-5 col-md-7 text-center">
+                        <img data-mercury="kickimage" data-content-name="logo_image" alt="{{content.title}}" src="https://d2zc23renulrga.cloudfront.net/assets/26643/frfzhdvrlzf1l3zof5lp/kol-w.png" class="img-responsive center-block">
+                </section> <!-- /end col -->
+                <!-- /END LOGO SIDE -->
+
+                <!-- START DESCRIPTION SIDE -->            
+                <section id="description" class="col-xs-12 col-sm-7 col-md-5">
+                    <div id="form" class="row">
+                        <!-- Headline -->
+                        <div class="col-md-10 col-md-offset-1 text-center">
+                            <h1 class="title">KickoffLabs Viral Contests Theme</h1>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+                    
+                    <div class="row">
+                        <!-- Countdown Timer -->
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-muted"><i class="fa fa-spin fa-clock-o"></i> Ends in:<br><strong class="countdown outline"></strong></h3>
+                        </div> <!-- /end col -->
+                    </div> <!-- /end row -->
+
+                    <div id="subscribe">
+                        <!-- START SHARE RESPONSE -->
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>You have <strong>1</strong> entry</h3>
+                                <h4>Get <strong>1 more entry</strong> for every friend you refer</h4>
+                            </div> <!-- /end col -->
+                        </div> <!-- /end row -->
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack"><i class="icon-circle icon-stack-base"></i><span class="icon-fixed-width icon-light"><strong>&nbsp;1</strong></span></span>
+                                    </li>
+                                    <li>
+                                        <a href="" class="btn btn-info btn-lg btn-block"><i class="icon-facebook"></i> | SHARE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                            <i class="icon-circle icon-stack-base"></i>
+                                            <i class="icon-fixed-width icon-light"><strong>&nbsp;2</strong></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <a href="" class="btn btn-info btn-lg btn-block"><i class="icon-twitter"></i> | TWEET</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                        <i class="icon-circle icon-stack-base"></i>
+                                        <span class="icon-fixed-width icon-light"><strong>&nbsp;3</strong></span>
+                                    </li>
+                                    <li>
+                                        <a href="" class="btn btn-info btn-lg btn-block"><i class="icon-google-plus"></i> | SHARE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                        <i class="icon-circle icon-stack-base"></i>
+                                        <span class="icon-fixed-width icon-light"><strong>&nbsp;4</strong></span>
+                                    </li>
+                                    <li>
+                                        <a href="" class="btn btn-info btn-lg btn-block"><i class="icon-linkedin"></i> | SHARE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                        <i class="icon-circle icon-stack-base"></i>
+                                        <span class="icon-fixed-width icon-light"><strong>&nbsp;5</strong></span>
+                                    </li>
+                                    <li>
+                                        <h4 class="hidden-xs hidden-sm">Share your url</h4>
+                                    </li>
+                                    <li>
+                                        <div class="kol_social_url">
+                                    <div id="copy">{{social_url}}</div>
+                                </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                        <i class="icon-circle icon-stack-base"></i>
+                                        <span class="icon-fixed-width icon-light"><strong>&nbsp;6</strong></span>
+                                    </li>
+                                    <li>
+                                        <div class="fb-like" data-href="https://www.facebook.com/KickoffLabs" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-inline text-center">
+                                    <li>
+                                        <span class="icon-stack">
+                                            <i class="icon-circle icon-stack-base"></i>
+                                        <span class="icon-fixed-width icon-light"><strong>&nbsp;7</strong></span>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/izzypalmerin" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @izzypalmerin</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>  <!-- end subscribe -->
+
+                </section> <!-- /end col -->
+        <!-- /END DESCRIPTION SIDE -->            
+          
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+
+        <!-- http://rendro.github.io/countdown/ -->
+        <script src="https://d2zc23renulrga.cloudfront.net/assets/26643/0m9txtd6bdg49uxq93do/jquery.countdown.js"></script>
+        <script type="text/javascript">
+            $('.countdown').countdown({
+                date: "Aug 24, 2015 00:00:00",
+                render: function(data) {
+                    var el = $(this.el);
+                    el.empty()
+                        .append(this.leadingZeros(data.days, 0) + " <span>days</span> ")
+                        .append(this.leadingZeros(data.hours, 2) + "<span>hrs </span>")
+                        .append(this.leadingZeros(data.min, 2) + "<span>mins </span>")
+                        .append(this.leadingZeros(data.sec, 2) + "<span>s</span>");
+                }
+            });
+
+            $('form select[name=quiz]').change(function(e){
+                if ($('form select[name=quiz]').val() == '1'){
+                    $('#wrong').show();
+                    $('#answer').hide();
+                }else if ($('form select[name=quiz]').val() == '2'){
+                    $('#wrong').show();
+                    $('#answer').hide();
+                }else if ($('form select[name=quiz]').val() == '3'){
+                    $('#answer').show();
+                    $('#wrong').hide();
+                    $('#question').hide();
+                }else{
+                    $('#answer').hide();
+                    $('#wrong').hide();
+                }
+            });
+
+        </script>
+
+        <!-- Bootstrap Validator http://bootstrapvalidator.com/ -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.oneStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+
+                $('.twoStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    excluded: [':disabled'],
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                $('.threeStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        quiz: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Is it really that hard?"
+                                },
+                                regexp: {
+                                    regexp: /.*3$/,
+                                    message: ' '
+                                }
+                            } 
+                        }
+                    }
+                });
+
+                $('.emailStep').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'fa fa-check fa-2x',
+                        invalid: 'fa fa-times fa-2x',
+                        validating: 'fa fa-refresh fa-2x'
+                    },
+                    fields: {
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Don't you want to enter the contest?"
+                                },
+                                emailAddress: {
+                                    message: "We're cheering for you..."
+                                }
+                            }
+                        }
+                    }
+                });
+
+            });
+        </script>
+
+    </body>
+</html>

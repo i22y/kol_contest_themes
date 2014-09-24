@@ -51,6 +51,7 @@
 	            color: {{content.body_text_color}};
 	            text-rendering: optimizeLegibility;
 	            -webkit-font-smoothing: antialiased;
+	            background-color: {{content.background_color}};
 	        }
 
 	        body, input, textarea, select {
@@ -66,7 +67,7 @@
 
 			h1, h2, h3, h4, h5 {
 				line-height: 1.2em;
-        {{content.headline_font | font_family}}
+        		{{content.headline_font | font_family}}
 
 			}
 
@@ -140,39 +141,27 @@
 			}
 
 			/* Layout Styles
-			---------------------------------------------------------------------*/      			
-			.bg-image {
-	            position: fixed;
-	            top:0;
-    			left:0;
-	            {% if content.background_image != '' %}
-	            	background:url('{{content.background_image}}');
-	            {% else %}
-	            	background-color: {{content.background_color}};
-	            {% endif %}
-	            background-repeat: no-repeat;
-				background-position: center center;
-	            background-attachment: scroll;
-	              -webkit-background-size: cover;
-	              -moz-background-size: cover;
-	              -o-background-size: cover;
-	            background-size: cover;
-	            height:100%;
-	            width:100%;
-	            image-rendering: optimizeQuality; /* Gecko */
-	            -ms-interpolation-mode: bicubic; /* IE */
-	            {% if content.background_blur %}
-		            filter: blur(10px);
-		              -webkit-filter: blur(5px);
-		              -moz-filter: blur(5px);
-		              -o-filter: blur(5px);
-		              -ms-filter: blur(5px);
-		        	clip: rect(5px,295px,295px;5px);
-                {% endif %}
-	        	@media screen and (max-device-width: 1024px) {
-		        	background-attachment: fixed;
-		        }
+			---------------------------------------------------------------------*/      		
+			{% if content.background_blur %}
+	        div.backstretch {
+	            -webkit-filter: blur(4px);
+	            -moz-filter: blur(4px);
+	            -o-filter: blur(4px);
+	            -ms-filter: blur(4px);
+	            filter: blur(4px);
+	            margin: -10px; /* Added to get rid of white blur borders */
 	        }
+	        {% endif %}
+
+			{% if content.background_layout == 'Tile' %}
+	        .backstretch:before {
+	        	content: ""; 
+	        	width: 100%; 
+	        	height: 100%; 
+	        	background: url("{{content.background_image}}"); 
+	        	position: absolute;
+	        }
+	        {% endif %}
 
 	        #wrapper {
 	            width: 100%;
@@ -571,9 +560,6 @@
 	</head>
 
 	<body>
-		<!-- START BG IMAGE -->
-        <div class="bg-image"></div>
-        <!-- /END BG IMAGE -->
 
         <!-- START CONTENT -->
         <div class="container-fluid fill">
@@ -921,6 +907,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="{% asset_path css/bootstrap/3.2.0/bootstrap.min.js %}"></script>
         <script src="{% asset_path js/jquery-libs/bootstrap_validator/bootstrapvalidator.min.js %}"></script>
+        <!-- Backstretch.js MODIFIED FOR MOBILE https://github.com/FokkeZB/jquery-backstretch/blob/master/jquery.backstretch.js -->
+        <script src="https://d2zc23renulrga.cloudfront.net/assets/26643/medlm9fgel80izblh8yd/jquery.backstretch.js"></script>
 		<script src="{% asset_path js/jquery-libs/zclip/jquery.zclip.min.js %}"></script>
 		<script src="{% kol_submit_response %}"></script>
 		<script src="{% kol_external 2 %}"></script>
@@ -935,6 +923,20 @@
 			$('#oneStep').bind ('kol:success', function (event, data){
 		    	$('.signupHide').hide();
 		   	});
+
+			{% if content.background_layout == 'None' %}
+			{% else %}
+		   	$.backstretch(
+		   	["{{content.background_image}}"],
+		   	{
+		   		{% if content.background_layout == 'Horizontal' %}
+		   		centeredX: false,
+		   		{% endif %}
+		   		{% if content.background_layout == 'Vertical' %}
+		   		centeredY: false
+		   		{% endif %}
+		   	});
+		   	{% endif %}
 		</script>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>

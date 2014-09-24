@@ -14,7 +14,7 @@ options:
       hint: The background image for your page. Images are scaled to fit. Ideally
         use a background image with a size above 1920 x 1280 pixels or above.
       editor: Image
-      default: //d2zc23renulrga.cloudfront.net/assets/26643/cald9sz54uzc9u6g0mmy/palm_trees.jpg
+      default: //d2zc23renulrga.cloudfront.net/assets/26643/eqbrq3wuytd39u0lfxae/building_side.jpg
     background_layout:
       hint: Changes the position of your background image.
       editor: Choice
@@ -28,7 +28,7 @@ options:
     background_blur:
       hint: Adds a blur effect to your background image.
       editor: tf
-      default: false
+      default: true
     page_layout:
       hint: "The side of the page the form should live. \n"
       editor: Choice
@@ -128,15 +128,15 @@ options:
     signup_form_background_color:
       hint: The signup form background color.
       editor: color
-      default: '#62bcd6'
+      default: '#dfcdb5'
     title_brand_color:
       hint: The color of the title font (if NO logo image is used).
       editor: color
-      default: '#4f4f4f'
+      default: '#707070'
     headline_color:
       hint: The color of the headline font.
       editor: color
-      default: '#4f4f4f'
+      default: '#707070'
     body_text_color:
       hint: The primary color used for text on the page.
       editor: color
@@ -144,15 +144,15 @@ options:
     numbers_color:
       hint: The color of the guide numbers on your landing page.
       editor: color
-      default: '#ff6600'
+      default: '#d07f6a'
     button_color:
       hint: The color of the button on your landing page.
       editor: color
-      default: '#ff6600'
+      default: '#7ca7cf'
     link_color:
       hint: The color used for links within your landing page.
       editor: color
-      default: '#f7f7f7'
+      default: '#d07f6a'
   signup:
     show_labels:
       hint: Should form fields have labels?
